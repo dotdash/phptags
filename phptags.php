@@ -129,7 +129,7 @@ class Parser {
     $tag = array_merge(array(
       $name,
       $this->filename,
-      "let _s=@/ | /{$pattern}/; | let @/=_s\";\"",
+      "/{$pattern}/;\"",
       $type,
       "lineno:{$lineno}",
       $this->getScope(),
@@ -438,7 +438,7 @@ class Parser {
 
   private function getScope() {
     $curScope = end($this->scopes);
-    return "{$curScope[0]}:".implode('::', array_map(function($x) { return $x[1]; }, $this->scopes));
+    return "{$curScope[0]}:".implode('\\', array_map(function($x) { return $x[1]; }, $this->scopes));
   }
 
   private function getScopedPattern($pattern) {
